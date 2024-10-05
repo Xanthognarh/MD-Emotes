@@ -77,9 +77,10 @@ class TwApi:
         return r_dict
     
     def downloadEmote(self, filename: str, url: str):
+        global errorlog
         resp = self.session.get(url)
         if "content-type" not in resp.headers.keys():
-            print("Fehler: Kein Content-Type für",filename,url)
+            print("[ERROR] No Content-Type of",filename,url)
             return
         ext = resp.headers['Content-Type'].split('/')[-1]
         # if ('.png' not in filename) and ('.gif' not in filename):
@@ -88,7 +89,7 @@ class TwApi:
         #     img = Image.open(BytesIO(resp.content))
         #     ext = img.format.lower()
         if ":" in filename:
-            print(filename,"wurde nicht gespeichert, da inkompatibler Name")
+            print("[ERROR]",filename,"wasn't saved because of an incompatible filename.")
             return
 
         fname = filename + f'.{ext}'
@@ -103,9 +104,9 @@ class TwApi:
             try:
                 os.remove(fname)
             except PermissionError:
-                print(fname,"konnte nicht gelöscht werden, da geöffnet")
+                print(fname,"couldn't be deleted, because it was still opened.")
             except FileNotFoundError:
-                print(fname,"konnte nicht gelöscht werden, da nicht gefunden")
+                print(fname,"couldn't be deleted, because it wasn't found.")
             print(f'convertet to {filename}.gif')
 
     def downloadEmotes(self, emote_dict: dict, max_workers: int = 20, dir: str = '', channel: str = ""):
@@ -156,7 +157,7 @@ class TwApi:
 
 if __name__ == '__main__':
     argparser.add_argument('-c', '--channel', dest='channel', help='Channel name.', required=True)
-    argparser.add_argument('-d', '--dir', dest='dir', help='Download files into this directory. (default: \'./emotes\', will create if not exist.)', default='./emotes')
+    argparser.add_argument('-d', '--dir', dest='dir', help='Download files into this directory. (default: \'./Emotes\', will create if not exist.)', default='./Emotes')
     argparser.add_argument('-p', '--proxy', dest='proxy', help='Use specified HTTP proxy server. (e.g. \'http://localhost:10809\', or you can set https_proxy or all_proxy in the terminal)', default='')
     args = argparser.parse_args()
 
