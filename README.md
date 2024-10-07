@@ -1,5 +1,5 @@
 # MD-Emotes
-Use your Macro Deck 2 to write Twitch/7TV Emotes. This tool downloads the Emotes and creates a new Profile in Macro Deck 2 with the Emotes as Buttons.
+Use your [Macro Deck 2](https://github.com/Macro-Deck-App/Macro-Deck) to write Twitch/7TV Emotes. This tool downloads the Emotes and creates a new Profile in [Macro Deck 2](https://github.com/Macro-Deck-App/Macro-Deck) with the Emotes as Buttons.
 
 ## Installation
 Python already installed? Simply copy the `*.py` and `*.bat` files into the same directory.
